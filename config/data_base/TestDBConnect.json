@@ -1,0 +1,8 @@
+{
+	"DBName":   "testtaskdb",
+	"User":     "postgres",
+	"Password": "qwer4617",
+	"Host":     "127.0.0.1",
+	"Port":     4032,
+	"SSLMODE": "disable"
+}

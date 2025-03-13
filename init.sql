@@ -1,0 +1,3 @@
+CREATE DATABASE taskdb;
+
+GRANT ALL PRIVILEGES ON DATABASE taskdb TO postgres;
