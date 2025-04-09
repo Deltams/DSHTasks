@@ -2,7 +2,7 @@
 	"DBName":   "taskdb",
 	"User":     "postgres",
 	"Password": "qwer4617",
-	"Host":     "158.160.164.81",
-	"Port":     4032,
+	"Host":     "my-postgres-2",
+	"Port":     5432,
 	"SSLMODE": "disable"
 }

@@ -1,0 +1,7 @@
+Node exporter: 1860_rev37
+
+Запросы к Prometheus:
+1. Всего пользователей за все время: max(task_service_processed_active_users)
+2. Число активных пользователей за час: increase(task_service_processed_active_users[1h])
+3. Всего созданных задач: max(task_service_processed_create_tasks)
+4. Среднее количество задач на пользователя: max(task_service_processed_create_tasks)/max(task_service_processed_active_users)

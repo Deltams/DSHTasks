@@ -9,6 +9,8 @@ import (
 	ut "github.com/go-playground/universal-translator"
 	"github.com/gorilla/mux"
 	"github.com/jinzhu/gorm"
+	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promauto"
 	"gopkg.in/go-playground/validator.v9"
 
 	"go_project/config/data_base"
@@ -17,10 +19,53 @@ import (
 var validate *validator.Validate
 var trans ut.Translator
 
+var (
+	activeUsers = promauto.NewCounter(prometheus.CounterOpts{
+		Name: "task_service_processed_active_users",
+		Help: "Total registered users since the start of the system",
+	})
+)
+
+var (
+	createTasks = promauto.NewCounter(prometheus.CounterOpts{
+		Name: "task_service_processed_create_tasks",
+		Help: "Total tasks created since system launch",
+	})
+)
+
 func init() {
 	validate = validator.New()
 	uni := ut.New(en.New())
 	trans, _ = uni.GetTranslator("en")
+}
+
+func CreateUser(db *gorm.DB) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		var myUser data_base.MyUser
+
+		body, err := io.ReadAll(r.Body)
+		if err != nil {
+			http.Error(w, "Error reading the request body", http.StatusBadRequest)
+			return
+		}
+
+		err = json.Unmarshal(body, &myUser)
+		if err != nil {
+			http.Error(w, "JSON parsing error", http.StatusBadRequest)
+			return
+		}
+
+		result := db.Create(&myUser)
+		if result.Error != nil {
+			http.Error(w, result.Error.Error(), http.StatusInternalServerError)
+			return
+		}
+
+		activeUsers.Inc()
+
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(myUser)
+	}
 }
 
 func CreateTaskHandler(db *gorm.DB) http.HandlerFunc {
@@ -52,6 +97,8 @@ func CreateTaskHandler(db *gorm.DB) http.HandlerFunc {
 			http.Error(w, result.Error.Error(), http.StatusInternalServerError)
 			return
 		}
+
+		createTasks.Inc()
 
 		w.Header().Set("Content-Type", "application/json")
 		json.NewEncoder(w).Encode(task)

@@ -7,6 +7,7 @@ import (
 
 	"github.com/gorilla/mux"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 
 	"go_project/app"
 	"go_project/config/data_base"
@@ -32,6 +33,8 @@ func main() {
 	router.HandleFunc("/tasks/{id}", app.GetTaskHandler(db)).Methods("GET")
 	router.HandleFunc("/tasks/{id}", app.CompleteTaskHandler(db)).Methods("PUT")
 	router.HandleFunc("/tasks/{id}", app.DeleteTaskHandler(db)).Methods("DELETE")
+	router.HandleFunc("/register", app.CreateUser(db)).Methods("POST")
+	router.Handle("/metrics", promhttp.Handler())
 
 	fmt.Println("The server is running on the port :8080")
 	log.Fatal(http.ListenAndServe(":8080", router))

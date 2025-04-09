@@ -17,6 +17,11 @@ type Task struct {
 	IsCompleted bool   `json:"is_completed"`
 }
 
+type MyUser struct {
+	ID       uint   `gorm:"primary_key" json:"id"`
+	NameUser string `gorm:"not null" json:"name_user"`
+}
+
 type ConfigDB struct {
 	Host     string `json:"Host"`
 	Port     int    `json:"Port"`
@@ -68,4 +73,5 @@ func readConfigFromJSON(filePath string) (*ConfigDB, error) {
 
 func Migrate(db *gorm.DB) {
 	db.AutoMigrate(&Task{})
+	db.AutoMigrate(&MyUser{})
 }
