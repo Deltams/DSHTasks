@@ -1,0 +1,36 @@
+name: Check the entire project for correctness
+on:
+  push:
+    branches: [main]
+jobs:
+  test:
+    runs-on: self-hosted # Можно заменить на self-hosted, когда будет подключен наш сервер
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Deploy repository
+        run: sudo docker compose up --build
+      # Прописать установку зависимостей backend
+      # Запуск backend (возможно сборка)
+      # Прописать установку зависимостей frontend
+      # Запуск frontend (возможно сборка)
+  # deploy:
+  #   needs: [test]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Check-out-repository-code
+  #       uses: actions/checkout@v4
+  #     - name: Set up QEMU
+  #       uses: docker/setup-qemu-action@v3
+  #     - name: Set up Docker Buildx
+  #       uses: docker/setup-buildx-action@v3
+  #     - name: Build and push
+  #       uses: docker/build-push-action@v6
+  #       with:
+  #         file: Dockerfile
+  #         push: false
+  #         tags: user/app:latest
+      # Прописать установку зависимостей backend
+      # Запуск backend (возможно сборка) и проверка тестов backend
+      # Прописать установку зависимостей frontend
+      # Запуск frontend (возможно сборка) и проверка тестов frontend
