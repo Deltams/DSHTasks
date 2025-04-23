@@ -29,7 +29,7 @@ func main() {
 	// Создание маршрутизатора
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/tasks", app.CreateTaskHandler(db)).Methods("POST")
-	router.HandleFunc("/tasks", app.GetTasksHandler(db)).Methods("GET")
+	router.HandleFunc("/mytasks", app.GetTasksHandler(db)).Methods("GET")
 	router.HandleFunc("/tasks/{id}", app.GetTaskHandler(db)).Methods("GET")
 	router.HandleFunc("/tasks/{id}", app.CompleteTaskHandler(db)).Methods("PUT")
 	router.HandleFunc("/tasks/{id}", app.DeleteTaskHandler(db)).Methods("DELETE")
