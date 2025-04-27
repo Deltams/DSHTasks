@@ -1,0 +1,9 @@
+{
+  "name": "My Postgres DB",
+  "host": "my-postgres-2",
+  "username": "postgres",
+  "password": "qwer4617",
+  "database": "taskdb",
+  "port": 5432,
+  "maintenance_db": "postgres"
+}
