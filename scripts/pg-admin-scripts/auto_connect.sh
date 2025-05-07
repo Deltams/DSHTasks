@@ -1,5 +1,6 @@
 # Подождём немного, пока поднимется Postgres (можно заменить на более сложную проверку)
-sleep 15
+echo "Starting connection script..."
+sleep 10
 
 # Авторизируемся в pgAdmin API и получаем токен
 TOKEN=$(curl -X GET \
@@ -8,6 +9,7 @@ TOKEN=$(curl -X GET \
   -d '{"email": "$PGADMIN_DEFAULT_EMAIL", "password": "$PGADMIN_DEFAULT_PASSWORD"}' | jq -r '.token')
 
 # Создаём сервер PostgreSQL
+echo "Token received: $TOKEN"
 SERVER_ID=$(curl -X POST \
   http://localhost:$PGADMIN_LISTEN_PORT/api/server \
   -H "Authorization: Bearer $TOKEN" \
