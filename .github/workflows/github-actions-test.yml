@@ -11,7 +11,7 @@ jobs:
       - name: Stop and delete the previous version
         run: sudo docker compose down -v
       - name: Deploy repository
-        run: sudo docker compose up --build -d
+        run: sudo docker compose up --build --progress plain -d
       # Прописать установку зависимостей backend
       # Запуск backend (возможно сборка)
       # Прописать установку зависимостей frontend
