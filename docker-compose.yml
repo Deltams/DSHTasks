@@ -23,7 +23,9 @@ services:
 #------------------------------------
 
   pgadmin:
-    build: ./Dockerfile.pgadmin
+    build:
+      context: .
+      dockerfile: Dockerfile.pgadmin
     container_name: pgadmin-2
     ports:
       - 4080:80
@@ -36,7 +38,9 @@ services:
 #------------------------------------
 
   task-container:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: task-container-go 
     ports:
       - 8080:8080
