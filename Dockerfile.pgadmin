@@ -5,8 +5,9 @@ ENV PGADMIN_DEFAULT_EMAIL="admin@pgadmin.com" \
     PGADMIN_LISTEN_PORT="80"
 
 COPY scripts/pg-admin-scripts /scripts
-RUN chmod +x /scripts/auto_connect.sh
 
 WORKDIR /scripts
+
+RUN chmod +x ./auto_connect.sh
 
 ENTRYPOINT ["./auto_connect.sh"]
