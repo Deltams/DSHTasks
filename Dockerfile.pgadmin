@@ -8,6 +8,6 @@ COPY scripts/pg-admin-scripts /scripts
 
 WORKDIR /scripts
 
-RUN chmod +x ./auto_connect.sh
+RUN sudo chmod +x ./auto_connect.sh
 
 ENTRYPOINT ["./auto_connect.sh"]
