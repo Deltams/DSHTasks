@@ -23,7 +23,7 @@ services:
 #------------------------------------
 
   pgadmin:
-    build: ./config/data_base
+    build: ./Dockerfile.pgadmin
     container_name: pgadmin-2
     ports:
       - 4080:80
