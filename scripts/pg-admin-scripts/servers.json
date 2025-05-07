@@ -1,7 +1,7 @@
 {
   "Servers": {
       "1": {
-          "Name": "My PostgreSQL Server",
+          "Name": "My PostgreSQL Server - 2025",
           "Group": "Servers",
           "Host": "my-postgres-2",
           "Port": 5432,
