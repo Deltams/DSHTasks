@@ -55,10 +55,14 @@ services:
   grafana:
     image: grafana/grafana-oss
     container_name: grafana2025
+    environment:
+      GF_PATHS_PROVISIONING: '/etc/grafana/provisioning/'
     ports:
       - "3000:3000"
     volumes:
       - grafana-storage:/var/lib/grafana
+      - ./dashboards/:/etc/grafana/provisioning/dashboards
+      - ./datasources/:/etc/grafana/provisioning/datasource
 
 #------------------------------------
 

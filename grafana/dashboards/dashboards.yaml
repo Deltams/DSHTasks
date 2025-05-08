@@ -1,0 +1,10 @@
+providers:
+  - name: 'Node-exporter'
+    orgId: 1
+    folder: 'my-node-exporter'
+    type: file
+    disableDeletion: false
+    editable: true
+    options:
+      path: /etc/grafana/provisioning/dashboards/1860_rev37.json
+      foldersFromFilesStructure: true
