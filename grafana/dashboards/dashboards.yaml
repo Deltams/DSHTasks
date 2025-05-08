@@ -9,3 +9,13 @@ providers:
     options:
       path: /etc/grafana/provisioning/dashboards/node-exporter
       foldersFromFilesStructure: true
+  
+  - name: 'my-go-dashboard'
+    orgId: 1
+    folder: 'my-go-exporter'
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 20
+    options:
+      path: /etc/grafana/provisioning/dashboards/my-go-exporter
+      foldersFromFilesStructure: true
