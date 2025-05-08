@@ -9,7 +9,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
       - name: Stop and delete the previous version
-        run: sudo docker compose down # -v удаляем предыдущий запущенный контейнер (и удаляем данные, которые находились в томах)
+        run: sudo docker compose down -v # -v удаляем предыдущий запущенный контейнер (и удаляем данные, которые находились в томах)
       - name: Deploy repository
         run: sudo docker compose up --build -d # -d запускаем сборку в фоновом режиме
       # Прописать установку зависимостей backend
